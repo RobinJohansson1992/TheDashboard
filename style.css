@@ -1,0 +1,184 @@
+body {
+  /* font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; */
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  background-image: url("images/forest1.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+#show-time {
+  color: rgb(21, 21, 21);
+  margin-right: 25px;
+  font-weight: bold;
+}
+#show-date {
+  color: rgb(0, 0, 0);
+  font-weight: 100;
+}
+.headerBox {
+  display: flex;
+  justify-content: center;
+}
+.time-box {
+  width: 17rem;
+  background-color: rgba(209, 209, 209, 0.511);
+  display: flex;
+  justify-content: center;
+  padding: 0.3em;
+  border-radius: 1em;
+  margin-top: 1rem;
+}
+/* h1 {
+  display: flex;
+  justify-content: center;
+  margin-top: 4rem;
+  font-size: 3.1rem;
+  font-weight: 600;
+  color: white;
+} */
+#headerInput {
+  display: flex;
+  justify-self: center;
+  text-align: center;
+  margin-top: 4rem;
+  font-size: 4rem;
+  font-weight: 600;
+  color: white;
+  background-color: rgba(240, 248, 255, 0);
+  border: none;
+  margin-bottom: 2rem;
+  outline: none;
+  width: 90vw;
+}
+#headerInput::placeholder {
+  color: white;
+}
+h2 {
+  font-size: 1.6rem;
+  font-weight: 50;
+  color: rgb(25, 25, 25);
+}
+main {
+  width: 100vw;
+  display: flex;
+}
+
+.addLink {
+  display: flex;
+  flex-direction: column;
+  justify-self: center;
+  background-color: rgba(241, 241, 241, 0.953);
+  padding: 3rem 5rem;
+  border-radius: 15px;
+  z-index: 2;
+  position: absolute;
+  margin-top: 10rem;
+  box-shadow: 0px 0px 20px black;
+}
+.hidden {
+  display: none;
+}
+.addLinkInputs {
+  margin-top: 1rem;
+  border-radius: 10px;
+  border: 1px solid rgb(110, 110, 110);
+  padding: 10px;
+}
+.addLink h2 {
+  margin-bottom: 0rem;
+}
+#addBtn {
+  margin-top: 1rem;
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+  background-color: rgba(200, 237, 215, 0.819);
+  box-shadow: 0px 0px 2px black;
+  color: rgb(31, 31, 31);
+}
+#closeBtn {
+  margin-top: 1rem;
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+  box-shadow: 0px 0px 2px black;
+  background-color: rgba(237, 203, 200, 0.819);
+  color: rgb(31, 31, 31);
+}
+.cardBox {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 80vw;
+  justify-self: center;
+}
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+  background-color: rgba(181, 181, 181, 0.607);
+  width: 18.5em;
+  height: 22em;
+  padding-top: 1em;
+  border-radius: 1rem;
+  backdrop-filter: blur(4px);
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.223);
+  border-left: 2px solid rgba(255, 255, 255, 0.548);
+  border-top: 2px solid rgba(255, 255, 255, 0.705);
+}
+.card h2 {
+  margin: 15px 0px 10px 0px;
+}
+
+.bigLink {
+  display: flex;
+  align-items: center;
+  width: 80%;
+  justify-content: space-between;
+  background-color: white;
+  padding: 1em;
+  max-height: 1.5em;
+  border-radius: 0.5em;
+  margin: 0px 0px 10px 0px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.223);
+}
+#addLinkBtn {
+  text-decoration: none;
+  background-color: rgba(144, 144, 144, 0.563);
+  color: white;
+  padding: 0.5em;
+  width: 9rem;
+  display: flex;
+  justify-content: center;
+  border-radius: 0.5rem;
+}
+.footerBox {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+.footerBox a {
+  text-decoration: none;
+  width: 15rem;
+  color: white;
+  background-color: rgba(145, 145, 145, 0.511);
+  display: flex;
+  justify-content: center;
+  padding: 0.5em;
+  border-radius: 0.5em;
+  -webkit-border-radius: 0.5em;
+  -moz-border-radius: 0.5em;
+  -ms-border-radius: 0.5em;
+  -o-border-radius: 0.5em;
+}
+#notes {
+  width: 19em;
+  height: 18em;
+  border: none;
+  border-radius: 1em;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.116);
+  padding: 1rem;
+  opacity: 0.6;
+}
