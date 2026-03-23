@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TheDashboard</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js" defer></script>
+  </head>
+  <body onload="(TimeNow(), DateNow())">
+    <header>
+      <div class="headerBox">
+        <div class="time-box">
+          <div id="show-time"></div>
+          <div id="show-date"></div>
+        </div>
+      </div>
+    </header>
+
+    <body>
+      <div class="addLink hidden" id="popup">
+        <h2>Lägg till snabblänk:</h2>
+        <p></p>
+        <input type="text" placeholder="Ange länkadress..." class="addLinkInputs" id="linkInput">
+        <input type="text" placeholder="Ange namn..." class="addLinkInputs" id="nameInput">
+        <button id="addBtn">Lägg till</button>
+        <button id="closeBtn">Stäng</button>
+      </div>
+      <input type="text" placeholder="John Doe Dashboard" id="headerInput" />
+      <section class="cardBox">
+        <div class="card" id="linkCard">
+          <h2>Snabblänkar</h2>
+          <div class="bigLink">
+            <h2>G</h2>
+            <link href="https://www.google.com/">Google</link>
+            <a href="">x</a>
+          </div>
+          <div class="bigLink">
+            <h2>N</h2>
+            <p>Notion</p>
+            <a href="">x</a>
+          </div>
+
+          <a href="" id="addLinkBtn">+ Lägg till länk</a>
+        </div>
+
+        <div class="card" id="weatherCard">
+          <h2>Dagens väder</h2>
+        </div>
+
+        <div class="card" id="shopCard">
+          <h2>Handla</h2>
+        </div>
+
+        <div class="card" id="notesCard">
+          <h2>Anteckningar</h2>
+          <textarea name="" id="notes"></textarea>
+        </div>
+      </section>
+    </body>
+
+    <footer>
+      <div class="footerBox">
+        <a href="">Slumpa ny bakgrund</a>
+      </div>
+    </footer>
+  </body>
+</html>
