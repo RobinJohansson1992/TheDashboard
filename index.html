@@ -17,39 +17,59 @@
       </div>
     </header>
 
-    <body>
       <div class="addLink hidden" id="popup">
         <h2>Lägg till snabblänk:</h2>
         <p></p>
-        <input type="text" placeholder="Ange länkadress..." class="addLinkInputs" id="linkInput">
-        <input type="text" placeholder="Ange namn..." class="addLinkInputs" id="nameInput">
+        <input
+          type="text"
+          placeholder="Ange länkadress..."
+          class="addLinkInputs"
+          id="linkInput"
+        />
+        <input
+          type="text"
+          placeholder="Ange namn..."
+          class="addLinkInputs"
+          id="nameInput"
+        />
         <button id="addBtn">Lägg till</button>
         <button id="closeBtn">Stäng</button>
       </div>
-      <input type="text" placeholder="John Doe Dashboard" id="headerInput" />
+
+      <div class="pageHeader">
+        <h1 id="headerInput" >John Doe Dashboard</h1>
+      </div>
       <section class="cardBox">
         <div class="card" id="linkCard">
-          <h2>Snabblänkar</h2>
-          <div class="bigLink">
-            <h2>G</h2>
-            <link href="https://www.google.com/">Google</link>
-            <a href="">x</a>
+          <div class="links">
+            <h2>Snabblänkar</h2>
+            <div id="linkList">
+              <div class="bigLink">
+                <div class="bigLinkText">
+                  <img
+                    src="https://www.google.com/s2/favicons?domain=google.com&sz=64"
+                    alt="Google"
+                    width="32"
+                    height="32"
+                  />
+                  <a href="https://www.google.com" target="_blank">Google</a>
+                </div>
+                <div class="bigLinkRemoveButton">
+                  <button class="removeBtn">-</button>
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="bigLink">
-            <h2>N</h2>
-            <p>Notion</p>
-            <a href="">x</a>
-          </div>
-
           <a href="" id="addLinkBtn">+ Lägg till länk</a>
         </div>
 
         <div class="card" id="weatherCard">
           <h2>Dagens väder</h2>
+          <div id="weatherList"></div>
         </div>
 
         <div class="card" id="shopCard">
-          <h2>Handla</h2>
+          <h2>Nyheter</h2>
         </div>
 
         <div class="card" id="notesCard">
