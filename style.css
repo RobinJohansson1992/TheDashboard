@@ -176,12 +176,17 @@ main {
   padding: 1em;
   max-height: 1.5em;
   border-radius: 0.5em;
-  margin: 0px 0px 10px 0px;
+  margin: 5px 0px 5px 0px;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.223);
 }
 .bigLinkText {
   display: flex;
   align-items: center;
+}
+.bigLinkText img {
+  height: 2.5em;
+  width: 2.5em;
+  border-radius: 10px;
 }
 .bigLinkRemoveButton {
   display: flex;
@@ -206,36 +211,34 @@ main {
   align-items: center;
 }
 .weatherIcon {
-  font-size: 2.5rem;
+  font-size: 2.3rem;
   background-color: rgba(234, 234, 234, 0.982);
   border-radius: 35px;
-  margin-right: 10px;
+  margin-right: 20px;
+  margin-left: 5px;
 }
 .weatherItem {
   background: rgba(255, 255, 255, 0.467);
   list-style: none;
   display: flex;
   align-items: center;
-  margin-bottom: 15px;
+  margin-bottom: 5px;
   margin-top: 5px;
-  padding: 0.7rem 1rem;
-  width: 15em;
+  padding: 0.5rem;
+  width: 125%;
   border-radius: 7px;
-  -webkit-border-radius: 7px;
-  -moz-border-radius: 7px;
-  -ms-border-radius: 7px;
-  -o-border-radius: 7px;
+  font-size: 0.8rem;
 }
 .weatherDate {
   font-weight: bold;
 }
-.weatherBox{
+.weatherBox {
   display: flex;
   flex-direction: column;
 }
-.tempText{
+.tempText {
   display: flex;
-  margin-top:5px;
+  margin-top: 5px;
   justify-content: space-between;
 }
 .weatherTemp {

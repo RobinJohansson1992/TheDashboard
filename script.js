@@ -1,4 +1,4 @@
-//clock and date-------------------------
+//clock and date----------------------------------
 function TimeNow() {
   const d = new Date();
   let h = d.getHours();
@@ -24,19 +24,18 @@ function DateNow() {
     day + " " + month + " " + year;
   setTimeout(DateNow, 1000);
 }
-
-// Header------------------------------
+//-----------------------------------------------
+// Header----------------------------------------
 const header = document.getElementById("headerInput");
 const savedHeader = localStorage.getItem("headerTitle");
 header.contentEditable = "true";
-header.spellcheck = "false";
 if (savedHeader) header.textContent = savedHeader;
 
 header.addEventListener("input", () => {
   localStorage.setItem("headerTitle", header.textContent);
 });
-
-// Links-----------------------------
+//------------------------------------------------
+// Links------------------------------------------
 const addLink = document.getElementById("addLinkBtn");
 const popup = document.getElementById("popup");
 
@@ -58,6 +57,48 @@ const linkInput = document.getElementById("linkInput");
 const titleInput = document.getElementById("nameInput");
 const addBtn = document.getElementById("addBtn");
 
+const linkList = document.getElementById("linkList");
+
+// save links to localStorage:
+function saveLinks() {
+  const links = [];
+  document.querySelectorAll(".bigLink").forEach((link) => {
+    links.push({
+      url: link.querySelector("a").href,
+      title: link.querySelector("a").textContent,
+      icon: link.querySelector("img").src,
+    });
+  });
+  localStorage.setItem("savedLinks", JSON.stringify(links));
+}
+
+// create link element:
+function createLinkElement(url, title, icon) {
+  const newBigLink = document.createElement("div");
+  newBigLink.classList.add("bigLink");
+  newBigLink.innerHTML = `
+    <div class="bigLinkText">
+      <img src="${icon}">
+      <a href="${url}" target="_blank">${title}</a>
+    </div>
+    <div class="bigLinkRemoveButton">
+      <button class="removeBtn">-</button>
+    </div>
+  `;
+  // remove bigLink:
+  newBigLink.querySelector(".removeBtn").addEventListener("click", (e) => {
+    e.preventDefault();
+    newBigLink.remove();
+    saveLinks();
+  });
+  return newBigLink;
+}
+// get saved links from localStorage:
+const savedLinks = JSON.parse(localStorage.getItem("savedLinks")) || [];
+savedLinks.forEach(({ url, title, icon }) => {
+  linkList.appendChild(createLinkElement(url, title, icon));
+});
+
 addBtn.addEventListener("click", (e) => {
   e.preventDefault();
 
@@ -74,33 +115,17 @@ addBtn.addEventListener("click", (e) => {
   const finalLink = new URL(completeUrl).hostname;
   const urlIcon = `https://www.google.com/s2/favicons?domain=${finalLink}&sz=64`;
 
-  // create new div:
-  const newBigLink = document.createElement("div");
-  newBigLink.classList.add("bigLink");
-  newBigLink.innerHTML = `
-  <div class="bigLinkText">
-  <img src="${urlIcon}" alt="${finalLink}" width="32" height="32">
-    <a href="${completeUrl}" target="_blank">${title}</a>
-    </div>
-    <div class="bigLinkRemoveButton">
-    <button class="removeBtn">-</button>
-    </div>
-  `;
-
-  newBigLink.querySelector(".removeBtn").addEventListener("click", (e) => {
-    e.preventDefault();
-    newBigLink.remove();
-  });
-
-  const linkList = document.getElementById("linkList");
-  linkList.prepend(newBigLink);
+  // save links in local storage:
+  linkList.prepend(createLinkElement(completeUrl, title, urlIcon));
+  saveLinks();
 
   // reset and close popup:
   linkInput.value = "";
   titleInput.value = "";
   popup.classList.add("hidden");
 });
-// weather-----------------------
+//---------------------------------------------------
+// weather-------------------------------------------
 const baseURL = "https://api.open-meteo.com/v1/";
 const weatherList = document.getElementById("weatherList");
 
@@ -191,14 +216,14 @@ function createList(daily) {
 //   error.textContent = message;
 // }
 fetchForecast();
-
-// notes ---------------------------------------
+//------------------------------------------------
+// notes -----------------------------------------
 const notepad = document.getElementById("notes");
 const savedNotes = localStorage.getItem("savedNotes");
 
 if (savedNotes) {
-  notepad.innerText = savedNotes;
+  notepad.value = savedNotes;
 }
 notepad.addEventListener("input", () => {
-  localStorage.setItem("savedNotes", notepad.innerText);
+  localStorage.setItem("savedNotes", notepad.value);
 });
