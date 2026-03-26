@@ -124,9 +124,53 @@ addBtn.addEventListener("click", (e) => {
   titleInput.value = "";
   popup.classList.add("hidden");
 });
+
+//---------------------------------------------------
+// news----------------------------------------------
+const apiKey = "5cfaef00c1985477323a295a214f1bbc";
+async function fetchNews() {
+  // const apiKey = import.meta.env.API_KEY;
+  try {
+    const response = await fetch(
+      `https://api.mediastack.com/v1/news?access_key=${apiKey}&countries=us,se&limit=10`,
+    );
+
+    if (!response.ok) {
+      throw new Error("Kunde inte hämta data");
+    }
+
+    const data = await response.json();
+    createNewsList(data.data);
+  } catch (error) {
+    console.error("Kunde inte hämta nyheter:", error);
+  }
+}
+
+function createNewsList(articles) {
+  const newsList = document.getElementById("newsList");
+
+  newsList.innerHTML = "";
+
+  articles.forEach((article) => {
+    const articleDiv = document.createElement("div");
+    articleDiv.classList.add("articleDiv");
+
+    articleDiv.innerHTML = `
+    ${article.image ? `<img src="${article.image}" alt="${article.title}">` : ""}
+      <a href="${article.url}" target="_blank">${article.title}</a>
+      <p>- ${article.source}</p>
+    `;
+    newsList.appendChild(articleDiv);
+  });
+}
+document.getElementById("refreshBtn").addEventListener("click", (e) => {
+  e.preventDefault();
+  fetchNews();
+});
+fetchNews();
 //---------------------------------------------------
 // weather-------------------------------------------
-const baseURL = "https://api.open-meteo.com/v1/";
+const weatherURL = "https://api.open-meteo.com/v1/";
 const weatherList = document.getElementById("weatherList");
 
 const weathers = {
@@ -164,7 +208,7 @@ const weathers = {
 async function fetchForecast() {
   try {
     const response = await fetch(
-      `${baseURL}forecast?latitude=57.1056&longitude=12.2508&daily=weather_code,temperature_2m_max,temperature_2m_min&timezone=Europe%2FStockholm&forecast_days=3`,
+      `${weatherURL}forecast?latitude=57.1056&longitude=12.2508&daily=weather_code,temperature_2m_max,temperature_2m_min&timezone=Europe%2FStockholm&forecast_days=3`,
     );
 
     if (!response.ok) {

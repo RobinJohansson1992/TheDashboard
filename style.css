@@ -52,7 +52,7 @@ body {
 h2 {
   font-size: 1.6rem;
   font-weight: 50;
-  color: rgb(25, 25, 25);
+  color: rgb(32, 32, 32);
 }
 main {
   width: 100vw;
@@ -126,19 +126,39 @@ main {
   margin-top: 1rem;
   padding: 10px;
   border-radius: 10px;
+  text-shadow: 1px 1px 2px black;
   border: none;
-  background-color: rgba(200, 237, 215, 0.819);
-  box-shadow: 0px 0px 2px black;
-  color: rgb(31, 31, 31);
+  font-size: 17px;
+  font-weight: bold;
+  background-color: rgba(168, 194, 173, 0.819);
+  box-shadow: 3px 3px 2px rgba(0, 0, 0, 0.441);
+  color: rgb(255, 255, 255);
+}
+#addBtn:hover {
+  background-color: rgba(190, 218, 195, 0.819);
+}
+#addBtn:active {
+  background-color: rgba(142, 162, 146, 0.819);
+  box-shadow: none;
 }
 #closeBtn {
   margin-top: 1rem;
   padding: 10px;
   border-radius: 10px;
+  text-shadow: 1px 1px 2px black;
   border: none;
-  box-shadow: 0px 0px 2px black;
-  background-color: rgba(237, 203, 200, 0.819);
-  color: rgb(31, 31, 31);
+  font-size: 17px;
+  font-weight: bold;
+  background-color: rgba(194, 172, 168, 0.819);
+  box-shadow: 3px 3px 2px rgba(0, 0, 0, 0.441);
+  color: rgb(255, 255, 255);
+}
+#closeBtn:hover {
+  background-color: rgba(218, 191, 190, 0.819);
+}
+#closeBtn:active {
+  background-color: rgba(167, 147, 147, 0.819);
+  box-shadow: none;
 }
 .cardBox {
   display: flex;
@@ -225,7 +245,7 @@ main {
   margin-bottom: 5px;
   margin-top: 5px;
   padding: 0.5rem;
-  width: 125%;
+  width: 115%;
   border-radius: 7px;
   font-size: 0.8rem;
 }
@@ -260,24 +280,93 @@ main {
   -ms-border-radius: 5px;
   -o-border-radius: 5px;
 }
+#newsList {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-y: auto;
+  height: 16rem;
+}
+.articleDiv {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.467);
+  width: 80%;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  padding: 1rem 1rem 0rem;
+  border-radius: 8px;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  -ms-border-radius: 8px;
+  -o-border-radius: 8px;
+}
+.articleDiv a {
+  text-decoration: none;
+  color: rgb(12, 3, 72);
+  font-weight: bold;
+  display: flex;
+  align-self: center;
+  font-size: 13px;
+}
+.articleDiv p {
+  text-decoration: none;
+  color: rgb(39, 39, 39);
+  display: flex;
+  align-self: end;
+  font-size: 13px;
+}
+.articleDiv img {
+  width: 100%;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.481);
+}
+#refreshBtn {
+  text-decoration: none;
+  background-color: rgba(178, 178, 178, 0.563);
+  color: white;
+  padding: 0.5em;
+  width: 9rem;
+  display: flex;
+  justify-content: center;
+  border-radius: 0.5rem;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.481);
+  text-shadow: 0px 0px 3px rgb(0, 0, 0);
+  -webkit-border-radius: 0.5rem;
+  -moz-border-radius: 0.5rem;
+  -ms-border-radius: 0.5rem;
+  -o-border-radius: 0.5rem;
+}
 .footerBox {
   display: flex;
   justify-content: center;
   margin-top: 2rem;
 }
+.footerBox p {
+  font-size: 30px;
+  margin-right: 10px;
+}
 .footerBox a {
   text-decoration: none;
-  width: 15rem;
-  color: white;
-  background-color: rgba(145, 145, 145, 0.511);
+  width: 13rem;
+  height: 1.5rem;
+  background-color: rgba(199, 199, 199, 0.729);
   display: flex;
+  color: rgb(24, 24, 24);
   justify-content: center;
+  align-items: center;
   padding: 0.5em;
   border-radius: 0.5em;
-  -webkit-border-radius: 0.5em;
-  -moz-border-radius: 0.5em;
-  -ms-border-radius: 0.5em;
-  -o-border-radius: 0.5em;
+}
+.footerBox a:hover {
+  background-color: rgba(232, 232, 232, 0.729);
+}
+.footerBox a:active {
+  background-color: rgba(232, 232, 232, 0.392);
 }
 #notes {
   width: 19em;
