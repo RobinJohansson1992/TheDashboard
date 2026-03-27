@@ -271,3 +271,35 @@ if (savedNotes) {
 notepad.addEventListener("input", () => {
   localStorage.setItem("savedNotes", notepad.value);
 });
+
+//-----------------------------------------------
+// change background-----------------------------
+
+const unsplashKey = "tT4cYdP0RO3ZN2TWA9Hrm52iGtGf_YCURYi59Ch-0Lk";
+
+async function fetchImage() {
+  const response = await fetch(
+    `https://api.unsplash.com/photos/random?client_id=${unsplashKey}`,
+  );
+
+  const data = await response.json();
+
+  const imgUrl = data.urls.regular;
+  setBackground(imgUrl);
+  localStorage.setItem("savedBackground", imgUrl); // spara
+}
+
+function setBackground(url) {
+  document.body.style.backgroundImage = `url(${url})`;
+}
+
+// get saved background:
+const savedBackground = localStorage.getItem("savedBackground");
+if (savedBackground) {
+  setBackground(savedBackground);
+}
+
+document.getElementById("updateImgBtn").addEventListener("click", (e) => {
+  e.preventDefault();
+  fetchImage();
+});
