@@ -192,7 +192,7 @@ main {
   align-items: center;
   justify-content: space-between;
   width: 80%;
-  background: rgba(255, 255, 255, 0.467);
+  background: rgba(255, 255, 255, 0.595);
   padding: 1em;
   max-height: 1.5em;
   border-radius: 0.5em;
@@ -238,7 +238,7 @@ main {
   margin-left: 5px;
 }
 .weatherItem {
-  background: rgba(255, 255, 255, 0.467);
+  background: rgba(255, 255, 255, 0.595);
   list-style: none;
   display: flex;
   align-items: center;
@@ -279,6 +279,21 @@ main {
   -moz-border-radius: 5px;
   -ms-border-radius: 5px;
   -o-border-radius: 5px;
+}
+#dadJokeBox {
+  display: flex;
+  justify-content: center;
+}
+.jokeDiv {
+  background: rgba(255, 255, 255, 0.595);
+  height: 13rem;
+  padding: 1rem;
+  width: 80%;
+  margin-top: 5px;
+  border-radius: 10px;
+  overflow-y: auto;
+  font-size: 14px;
+  color: rgb(40, 40, 40);
 }
 #newsList {
   display: flex;

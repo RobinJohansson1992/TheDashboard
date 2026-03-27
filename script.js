@@ -24,8 +24,9 @@ function DateNow() {
     day + " " + month + " " + year;
   setTimeout(DateNow, 1000);
 }
-//-----------------------------------------------
-// Header----------------------------------------
+//---------------------------------------------------------
+// Header--------------------------------------------------
+
 const header = document.getElementById("headerInput");
 const savedHeader = localStorage.getItem("headerTitle");
 header.contentEditable = "true";
@@ -34,13 +35,14 @@ if (savedHeader) header.textContent = savedHeader;
 header.addEventListener("input", () => {
   localStorage.setItem("headerTitle", header.textContent);
 });
-//------------------------------------------------
-// Links------------------------------------------
-const addLink = document.getElementById("addLinkBtn");
+//--------------------------------------------------------
+// Links--------------------------------------------------
+
+const addLinkBtn = document.getElementById("addLinkBtn");
 const popup = document.getElementById("popup");
 
-// add link button:
-addLink.addEventListener("click", (e) => {
+// add link button opens popup window:
+addLinkBtn.addEventListener("click", (e) => {
   e.preventDefault();
   popup.classList.remove("hidden");
 });
@@ -109,14 +111,18 @@ addBtn.addEventListener("click", (e) => {
     return;
   }
   // make sure the link starts with http/ https:
-  const completeUrl = link.startsWith("http") ? link : "https://" + link;
-
+  let completeUrl;
+  if (link.startsWith("http")) {
+    completeUrl = link;
+  } else {
+    completeUrl = "https://" + link;
+  }
   // use url to get icon from google:
-  const finalLink = new URL(completeUrl).hostname;
-  const urlIcon = `https://www.google.com/s2/favicons?domain=${finalLink}&sz=64`;
+  const finalUrl = new URL(completeUrl).hostname;
+  const urlIcon = `https://www.google.com/s2/favicons?domain=${finalUrl}&sz=64`;
 
   // save links in local storage:
-  linkList.prepend(createLinkElement(completeUrl, title, urlIcon));
+  linkList.prepend(createLinkElement(finalUrl, title, urlIcon));
   saveLinks();
 
   // reset and close popup:
@@ -127,47 +133,93 @@ addBtn.addEventListener("click", (e) => {
 
 //---------------------------------------------------
 // news----------------------------------------------
-const apiKey = "5cfaef00c1985477323a295a214f1bbc";
-async function fetchNews() {
-  // const apiKey = import.meta.env.API_KEY;
+// const apiKey = "5cfaef00c1985477323a295a214f1bbc";
+// async function fetchNews() {
+//   // const apiKey = import.meta.env.API_KEY;
+//   try {
+//     const response = await fetch(
+//       `https://api.mediastack.com/v1/news?access_key=${apiKey}&countries=us,se&limit=10`,
+//     );
+
+//     if (!response.ok) {
+//       throw new Error("Kunde inte hämta data");
+//     }
+
+//     const data = await response.json();
+//     createNewsList(data.data);
+//   } catch (error) {
+//     console.error("Kunde inte hämta nyheter:", error);
+//   }
+// }
+
+// function createNewsList(articles) {
+//   const newsList = document.getElementById("newsList");
+
+//   newsList.innerHTML = "";
+
+//   articles.forEach((article) => {
+//     const articleDiv = document.createElement("div");
+//     articleDiv.classList.add("articleDiv");
+
+//     articleDiv.innerHTML = `
+//     ${article.image ? `<img src="${article.image}" alt="${article.title}">` : ""}
+//       <a href="${article.url}" target="_blank">${article.title}</a>
+//       <p>- ${article.source}</p>
+//     `;
+//     newsList.appendChild(articleDiv);
+//   });
+// }
+// document.getElementById("refreshBtn").addEventListener("click", (e) => {
+//   e.preventDefault();
+//   fetchNews();
+// });
+// fetchNews();
+//---------------------------------------------------
+// dad-jokes-----------------------------------------
+const dadJokeUrl = "https://icanhazdadjoke.com/";
+const dadJokeBox = document.getElementById("dadJokeBox");
+const refreshBtn = document.getElementById("refreshBtn");
+const savedJoke = localStorage.getItem("savedJoke");
+
+async function fetchDadJoke() {
   try {
-    const response = await fetch(
-      `https://api.mediastack.com/v1/news?access_key=${apiKey}&countries=us,se&limit=10`,
-    );
+    const response = await fetch(dadJokeUrl, {
+      headers: { Accept: "application/json" },
+    });
 
     if (!response.ok) {
       throw new Error("Kunde inte hämta data");
     }
 
     const data = await response.json();
-    createNewsList(data.data);
+    createDadJoke(data);
   } catch (error) {
-    console.error("Kunde inte hämta nyheter:", error);
+    console.error("Kunde inte hämta skämt:", error);
+    dadJokeBox.textContent = "Kunde inte hämta skämt, försök igen.";
   }
 }
+function createDadJoke(dadJoke) {
+  dadJokeBox.innerHTML = "";
 
-function createNewsList(articles) {
-  const newsList = document.getElementById("newsList");
-
-  newsList.innerHTML = "";
-
-  articles.forEach((article) => {
-    const articleDiv = document.createElement("div");
-    articleDiv.classList.add("articleDiv");
-
-    articleDiv.innerHTML = `
-    ${article.image ? `<img src="${article.image}" alt="${article.title}">` : ""}
-      <a href="${article.url}" target="_blank">${article.title}</a>
-      <p>- ${article.source}</p>
+  const jokeDiv = document.createElement("div");
+  jokeDiv.classList.add("jokeDiv");
+  jokeDiv.innerHTML = `
+    <p>${dadJoke.joke}</p>
     `;
-    newsList.appendChild(articleDiv);
-  });
+
+  dadJokeBox.appendChild(jokeDiv);
+  localStorage.setItem("savedJoke", dadJoke.joke);
 }
-document.getElementById("refreshBtn").addEventListener("click", (e) => {
+if (savedJoke) {
+  createDadJoke({ joke: savedJoke });
+} else {
+  fetchDadJoke();
+}
+refreshBtn.addEventListener("click", (e) => {
   e.preventDefault();
-  fetchNews();
+  fetchDadJoke();
 });
-fetchNews();
+
 //---------------------------------------------------
 // weather-------------------------------------------
 const weatherURL = "https://api.open-meteo.com/v1/";
@@ -206,26 +258,39 @@ const weathers = {
 };
 
 async function fetchForecast() {
-  try {
-    const response = await fetch(
-      `${weatherURL}forecast?latitude=57.1056&longitude=12.2508&daily=weather_code,temperature_2m_max,temperature_2m_min&timezone=Europe%2FStockholm&forecast_days=3`,
-    );
+  // get the users position:
+  navigator.geolocation.getCurrentPosition(
+    async (position) => {
+      const lat = position.coords.latitude;
+      const lon = position.coords.longitude;
 
-    if (!response.ok) {
-      throw new Error("Kunde inte hämta data");
-    }
+      try {
+        const response = await fetch(
+          `${weatherURL}forecast?latitude=${lat}&longitude=${lon}&daily=weather_code,temperature_2m_max,temperature_2m_min&timezone=auto&forecast_days=3`,
+        );
 
-    const data = await response.json();
-    createList(data.daily);
-  } catch (error) {
-    showError(error.message);
-  }
+        if (!response.ok) {
+          throw new Error("Kunde inte hämta data");
+        }
+
+        const data = await response.json();
+        createList(data.daily);
+      } catch (error) {
+        console.error("Kunde inte hämta väder:", error);
+        weatherList.textContent = "Kunde inte hämta data, försök igen.";
+      }
+    },
+    (error) => {
+      console.error("Kunde inte hämta position:", error);
+      weatherList.textContent = "Kunde inte hämta din position.";
+    },
+  );
 }
-function createList(daily) {
+function createList(dailyWeather) {
   weatherList.innerHTML = "";
 
-  daily.time.forEach((date, index) => {
-    const code = daily.weather_code[index];
+  dailyWeather.time.forEach((date, index) => {
+    const code = dailyWeather.weather_code[index];
     const [text, icon] = weathers[code] ?? ["Okänt", "❓"];
 
     const iconDiv = document.createElement("div");
@@ -250,15 +315,12 @@ function createList(daily) {
     <div class="weatherBox">
     <span class="weatherDate">${date} <br></span>
     <div class="tempText">
-    <span class="weatherTemp">${daily.temperature_2m_max[index]}° </span> 
+    <span class="weatherTemp">${dailyWeather.temperature_2m_max[index]}° </span> 
     <span class="weatherText">${text} </span></div></div>`;
     // lägga till nån mer funktion om man klickar?
     weatherList.appendChild(li);
   });
 }
-// function showError(message) {
-//   error.textContent = message;
-// }
 fetchForecast();
 //------------------------------------------------
 // notes -----------------------------------------
