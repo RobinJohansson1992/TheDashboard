@@ -402,3 +402,23 @@ h2 {
   padding: 1rem;
   opacity: 0.6;
 }
+@media (max-width: 1450px) {
+  .cardBox {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 100vw;
+  }
+  .card {
+    width: 80%;
+    margin-bottom: 1rem;
+  }
+  #headerInput {
+    font-size: 3rem;
+  }
+  .footerBox {
+    margin-bottom: 2rem;
+    margin-top: 2rem;
+  }
+}
