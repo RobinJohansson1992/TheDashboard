@@ -74,7 +74,7 @@ function saveLinks() {
   localStorage.setItem("savedLinks", JSON.stringify(links));
 }
 
-// create link element:
+// create big link:
 function createLinkElement(url, title, icon) {
   const newBigLink = document.createElement("div");
   newBigLink.classList.add("bigLink");
@@ -118,11 +118,11 @@ addBtn.addEventListener("click", (e) => {
     completeUrl = "https://" + link;
   }
   // use url to get icon from google:
-  const finalUrl = new URL(completeUrl).hostname;
-  const urlIcon = `https://www.google.com/s2/favicons?domain=${finalUrl}&sz=64`;
+  const domain = new URL(completeUrl).hostname;
+  const urlIcon = `https://www.google.com/s2/favicons?domain=${domain}&sz=64`;
 
   // save links in local storage:
-  linkList.prepend(createLinkElement(finalUrl, title, urlIcon));
+  linkList.prepend(createLinkElement(completeUrl, title, urlIcon));
   saveLinks();
 
   // reset and close popup:
