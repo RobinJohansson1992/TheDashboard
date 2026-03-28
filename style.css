@@ -233,6 +233,7 @@ h2 {
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 60%;
 }
 .weatherIcon {
   font-size: 2.3rem;
@@ -249,7 +250,7 @@ h2 {
   margin-bottom: 5px;
   margin-top: 5px;
   padding: 0.5rem;
-  width: 115%;
+  width: 140%;
   border-radius: 7px;
   font-size: 0.8rem;
 }
@@ -420,5 +421,11 @@ h2 {
   .footerBox {
     margin-bottom: 2rem;
     margin-top: 2rem;
+  }
+  .weatherItem {
+    width: 140%;
+  }
+  #notes {
+    width: 85%;
   }
 }
