@@ -353,6 +353,10 @@ async function fetchImage() {
 
 function setBackground(url) {
   document.body.style.backgroundImage = `url(${url})`;
+  document.body.style.backgroundSize = "cover";
+  document.body.style.backgroundPosition = "center";
+  document.body.style.backgroundRepeat = "no-repeat";
+  document.body.style.backgroundAttachment = "fixed";
 }
 
 // get saved background:
